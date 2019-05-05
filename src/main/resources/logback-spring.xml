@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <configuration>
-
+    <!--控制台输出-->
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
@@ -10,11 +10,35 @@
         </layout>
     </appender>
 
+    <!-- WARN级别日志 appender -->
+    <appender name="fileWarnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，只记录WARN级别的日志 -->
+        <!-- 果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志。 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 设置过滤级别 -->
+            <level>WARN</level>
+            <!-- 用于配置符合过滤条件的操作 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 用于配置不符合过滤条件的操作 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志输出位置 可相对、和绝对路径 -->
+            <fileNamePattern>F:/log/sell/warn.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--文件中输出-->
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
         </filter>
         <encoder>
             <pattern>
@@ -23,8 +47,31 @@
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--路径-->
+            <!--绝对路径-->
             <fileNamePattern>F:/log/sell/info.%d.log</fileNamePattern>
+            <!--相对路径 在工程目录下创建-->
+            <!--<fileNamePattern>${log_dir}/trace/%d{yyyy-MM-dd}/logs.log</fileNamePattern>-->
+        </rollingPolicy>
+    </appender>
+
+    <!--文件中输出-->
+    <appender name="fileDebugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--绝对路径-->
+            <fileNamePattern>F:/log/sell/debug.%d.log</fileNamePattern>
+            <!--相对路径 在工程目录下创建-->
+            <!--<fileNamePattern>${log_dir}/trace/%d{yyyy-MM-dd}/logs.log</fileNamePattern>-->
         </rollingPolicy>
     </appender>
 
@@ -49,6 +96,8 @@
         <appender-ref ref="consoleLog" />
         <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />
+        <appender-ref ref="fileDebugLog"/>
+        <appender-ref ref="fileWarnLog"/>
     </root>
 
 </configuration>
