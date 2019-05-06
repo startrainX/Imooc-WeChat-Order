@@ -3,27 +3,29 @@ package com.imooc.sell.enums;
 import lombok.Getter;
 
 /**
- * 商品状态
+ * 支付状态
  * @author ：zsp
- * @date ：Created in 2019/5/5 16:15
+ * @date ：Created in 2019/5/6 14:52
  */
 @Getter
-public enum ProductStatusEnum {
+public enum PayStatusEnum {
 
     /**
-     * 上架商品
+     * 未支付
      */
-    Up(0,"上架"),
+    WAIT(0, "未支付"),
     /**
-     * 已下架商品
+     * 已支付
      */
-    Down(1,"下架")
+    SUCCESS(1, "支付成功")
+
     ;
 
     private Integer code;
+
     private String message;
 
-    ProductStatusEnum(Integer code, String message) {
+    PayStatusEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
