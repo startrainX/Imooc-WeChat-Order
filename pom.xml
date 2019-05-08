@@ -36,6 +36,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<!--Json转换-->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
 		<!--lombok日志文件-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
