@@ -21,7 +21,15 @@ public enum ResultEnum {
     ORDER_PAY_STATUS_ERROR(5, "订单支付状态不正确"),
     PARAM_ERROR(6, "参数错误"),
     CART_EMPTY(7, "购物车不能为空"),
-    ORDER_OWNER_ERROR(8, "该订单不属于当前用户")
+    ORDER_OWNER_ERROR(8, "该订单不属于当前用户"),
+    ORDER_CANCEL_SUCCESS(9, "订单取消成功"),
+    ORDER_FINISH_SUCCESS(10, "订单完结成功"),
+
+    PRODUCT_STATUS_ERROR(11, "商品状态不正确"),
+
+    LOGIN_FAIL(12, "登录失败, 登录信息不正确"),
+
+    LOGOUT_SUCCESS(13, "登出成功"),
     ;
 
     private Integer code;

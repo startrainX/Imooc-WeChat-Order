@@ -8,7 +8,7 @@ import lombok.Getter;
  * @date ：Created in 2019/5/6 14:52
  */
 @Getter
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnum{
 
     /**
      * 未支付
