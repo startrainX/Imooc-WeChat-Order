@@ -30,7 +30,7 @@ public class SellerAuthorizeAspect {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Pointcut("execution(public * com.imooc.sell.controller.Seller*.*(..))" +
+    @Pointcut("execution(public * com.imooc.sell.controller.Sell*.*(..))" +
             "&& !execution(public * com.imooc.sell.controller.SellerInfoController.*(..))")
     public void verify() {}
 
