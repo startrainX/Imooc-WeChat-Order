@@ -1,8 +1,12 @@
 package com.imooc.sell.handler;
 
+import com.imooc.sell.exception.SellException;
 import com.imooc.sell.exception.SellerAuthorizeException;
+import com.imooc.sell.utils.ResultVoUtil;
+import com.imooc.sell.vo.ResultVo;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -19,5 +23,11 @@ public class SellExceptionHandler {
     @ExceptionHandler(value = SellerAuthorizeException.class)
     public ModelAndView handlerAuthorizeException(){
         return new ModelAndView("/common/login");
+    }
+
+    @ExceptionHandler(SellException.class)
+    @ResponseBody
+    public ResultVo handlerSellException(SellException e){
+        return ResultVoUtil.error(e.getCode(), e.getMessage());
     }
 }

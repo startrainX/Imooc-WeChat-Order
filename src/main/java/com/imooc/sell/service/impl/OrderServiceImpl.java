@@ -14,6 +14,7 @@ import com.imooc.sell.repository.OrderDetailRepository;
 import com.imooc.sell.repository.OrderMasterRepository;
 import com.imooc.sell.service.OrderService;
 import com.imooc.sell.service.ProductInfoService;
+import com.imooc.sell.service.WebSocket;
 import com.imooc.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +48,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private ProductInfoService productInfoService;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -87,6 +91,9 @@ public class OrderServiceImpl implements OrderService{
                 .map(e -> new CartDTO(e.getProductId(), e.getProductQuantity()))
                 .collect(Collectors.toList());
         productInfoService.decreaseStock(cartDTOList);
+
+        //发送消息至前端
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
