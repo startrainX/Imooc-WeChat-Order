@@ -20,3 +20,8 @@ server:
 #  path:
 projectUrl:
   sell: 127.0.0.1:8080
+# mybatis中打印SQL语句用
+#logging:
+#  level:
+#    mybatis中mapper包的全路径： trace
+
